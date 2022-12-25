@@ -1,0 +1,63 @@
+{% extends 'main/base-main.html' %}{% load static %} {% block content %}
+<!-- About section -->
+
+<section class="about">
+  <div class="container grid">
+    <div>
+      <h1 class="md">Our organization</h1>
+      <p><strong>Hepto</strong> was established on 18th May 2018.</p>
+      <p>
+        We operate in the horn of Africa in these countries
+        <strong>Kenya</strong>, <strong>Somalia</strong>, and
+        <strong>Ethiopia.</strong>
+      </p>
+    </div>
+    <img src="{% static 'main/images/main/about.png' %}" alt="about us" />
+  </div>
+</section>
+
+<!-- Misson Visson and Core values -->
+<section class="mission mt-3">
+  <div class="container grid grid-3">
+    <div class="card-c flex">
+      <div>
+        <h2 class="text-center">Our Mission</h2>
+        <p>
+          The Healthcare Extension, Promotion and Training Organization (HEPTO)
+          seeks to unite donors, volunteers, staff, and communities around the
+          goal of advancing universal access to modern medicine and modern
+          medical best practices. We do this by establishing permanent
+          infrastructure and continuing medical training and education in
+          impoverished and traditionally underrepresented communities in Africa.
+        </p>
+      </div>
+    </div>
+    <div class="card-c flex">
+      <div>
+        <h2 class="text-center">Our Vision</h2>
+        <p>
+          We envision a world in which donors, volunteers, healthcare providers,
+          and patients have overcome all barriers to ensure universal access to
+          modern medicine and modern medical best practices. ​More than just
+          aid, impoverished communities all over the world need empowerment
+          through permanent infrastructure, training and education . With a
+          focus on medicine, HEPTO seeks to partner with nations to grow
+          independently and teach community leaders to provide for themselves.
+        </p>
+      </div>
+    </div>
+    <div class="card-c flex">
+      <div>
+        <h2 class="text-center">Our Goal</h2>
+        <p>
+          We know that to effect change we must address the cause of the
+          problem, not just the symptoms. That's why HEPTO seeks to offer more
+          than medical aid. We seek to partner with impoverished communities to
+          build permanent infrastructure for long-lasting change.​
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

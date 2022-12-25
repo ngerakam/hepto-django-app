@@ -1,0 +1,52 @@
+{% extends 'main/base-main.html' %} {% load static %} {% block content %}
+
+<!-- top -->
+{% include 'blog/top.html' %}
+<!-- end of blog -->
+<div class="container">
+  <div class="row position-relative">
+    <!-- first part -->
+    <div class="col-lg-8">
+      <!-- one -->
+      {% include 'blog/blog-nav.html' %}
+      <!-- blog holder -->
+      {% include 'blog/blog-holder.html' %}
+      <!-- end -->
+    </div>
+
+    <!-- divider -->
+
+    <div class="col-lg-4">
+      <!-- begin -->
+      {% include 'blog/blog-side-bar.html' %}
+      <!-- end -->
+    </div>
+
+    <!-- second part -->
+  </div>
+  <div class="row mt-5 text-center">
+    <div class="col-lg-8 text-center">
+      <nav class="pagination py-2 d-inline-block">
+        <div class="nav-links">
+          {% if article.has_previous %}
+          <a class="page-numbers" href="?page=1">First</a>
+          <a class="page-numbers" href="?page={{article.previous_page_number}}"
+            ><i class="icofont-thin-double-left"></i
+          ></a>
+          {% endif %} &nbsp;&nbsp; Page {{article.number}} of
+          {{article.paginator.num_pages}} &nbsp;&nbsp; {% if article.has_next %}
+          <a class="page-numbers" href="?page={{article.next_page_number}}"
+            ><i class="icofont-thin-double-right"></i
+          ></a>
+          <a class="page-numbers" href="?page={{article.paginator.num_pages}}"
+            >Last</a
+          >
+          {% endif %}
+        </div>
+      </nav>
+    </div>
+  </div>
+  <hr class="featurette-divider" />
+</div>
+<!-- <div class="container-fluid"></div> -->
+{%endblock%}

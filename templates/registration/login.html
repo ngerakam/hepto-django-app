@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>BlogApp</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static '/reg_form/css/roboto-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/reg_form/fonts/font-awesome-5/css/fontawesome-all.min.css' %}">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="{% static '/reg_form/css/style.css' %}" />
+</head>
+
+<body class="form-v5">
+	<div class="page-content">
+		<div class="form-v5-content">
+            
+            
+			<form class="form-detail" action="" method="post">
+                {% csrf_token %}
+				<h2>Login to Hepto</h2>
+				<div class="form-row">
+					<label for="full-name">Username</label>
+					<input type="text" name="username" id="username" class="input-text" placeholder="Username" required>
+					<i class="fas fa-user"></i>
+				</div>
+				<div class="form-row">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required>
+					<i class="fas fa-lock"></i>
+				</div>
+               
+				<div class="form-row-last">
+					<input type="submit" name="login" class="register" value="Login">
+				</div>
+                <div class="alert alert-success text-center" role="alert">
+                    {% if messages %}
+                    
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    
+                    {% endif %}
+                  </div>
+                <p class="text-center">You do not have an account?<a href={% url 'register' %}> Register</a></p>
+			</form>
+            
+		</div>
+	</div>
+</body>
+
+</html>

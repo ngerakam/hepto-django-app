@@ -1,0 +1,44 @@
+{% extends 'main/base-main.html' %} {% load static %} {% block content %}
+
+<div class="container card-c ms-auto me-auto">
+  <h2 class="text-center mb-5">Post an article</h2>
+
+  <form
+    class="row"
+    action="{% url 'add-article' author.id %}"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      {{form.title}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Tag</label>
+      {{form.tag}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Category</label>
+      {{form.category}}
+    </div>
+
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Image</label>
+      {{form.picture}}
+    </div>
+    <div class="form-floating mt-2 mb-2">
+      {{form.content}}
+      <label for="floatingTextarea">Add content here ....</label>
+    </div>
+    <div class="text-center">
+      <input
+        type="submit"
+        value="Add Article"
+        class="btn btn-success"
+        style="width: 140px"
+      />
+    </div>
+  </form>
+</div>
+
+{% endblock %}

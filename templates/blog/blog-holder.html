@@ -1,0 +1,28 @@
+{% load static %} {% block content %}
+<!-- content area -->
+
+{% for single in article %}
+<div class="b-area my-2">
+  <img src="{{single.picture.url}}" alt="blog image" />
+  <div class="mt-3">
+    <span class="text-muted me-5"
+      ><i class="fa fa-user" aria-hidden="true"></i>
+      {{single.author}}
+    </span>
+    <span class="text-muted me-5"
+      ><i class="fa fa-calendar" aria-hidden="true"></i>
+      {{single.date_written}}</span
+    >
+  </div>
+  <a href="{% url 'article' single.id %}">
+    <h2>{{single.title}}</h2>
+  </a>
+  <p>{{single.content}}</p>
+  <p>
+    <a class="btn btn-warning" href="{% url 'article' single.id %}"
+      >View details &raquo;</a
+    >
+  </p>
+</div>
+
+{% endfor %} {% endblock %}
