@@ -1,8 +1,22 @@
 from django.shortcuts import render
 
+from blog.models import Article
+
+# pagination
+from django.core.paginator import Paginator
+
 
 def Home(request):
-    return render(request, 'main/index.html')
+
+    paginated_article = Paginator(Article.objects.all(), 2)
+
+    page = request.GET.get("page")
+
+    article = paginated_article.get_page(page)
+
+    context = {"article": article}
+
+    return render(request, 'main/index.html', context)
 
 
 def Glance(request):

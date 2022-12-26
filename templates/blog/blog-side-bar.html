@@ -2,8 +2,8 @@
 <!-- begin -->
 <aside class="col-12 bg-light sticky-top" id="left">
   <div class="mt-2 mb-2">
-    <h3 class="mb-3">Search here</h3>
-    <form role="search" action="#">
+    <h3 class="mb-3 text-center">Search here</h3>
+    <form role="search" action="{% url 'blog' %}">
       <input
         class="form-control"
         type="search"
@@ -13,7 +13,7 @@
     </form>
   </div>
   <div class="mt-5 mb-3" id="side">
-    <h2 class="mb-3">Popular posts</h2>
+    <h2 class="mb-3 text-center">Popular posts</h2>
     <ul
       class="nav flex-md-column flex-row justify-content-between"
       id="sidenav"
@@ -28,11 +28,11 @@
     </ul>
   </div>
   <div class="mt-4 tag-a">
-    <h2 class="mb-3">Tags</h2>
+    <h2 class="mb-3 text-center">Tags</h2>
     {% for tag in tags %}
     <a
       role="button"
-      class="btn btn-outline-secondary mt-1 mb-1"
+      class="btn btn-outline-secondary mt-1 mb-1 ms-2 me-2"
       href="{% url 'tags' tag.id %}"
       >{{tag.title}}</a
     >

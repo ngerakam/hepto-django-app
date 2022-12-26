@@ -16,12 +16,14 @@ class ArticlesForm(ModelForm):
 
     class Meta:
         model = Article
-        fields = ['title', 'author', 'category', 'content', 'picture', 'tag']
+        fields = ['title', 'slug', 'author',
+                  'category', 'content', 'picture', 'tag']
 
     def __init__(self, *args, **kwargs):
         super(ArticlesForm, self).__init__(*args, **kwargs)
 
         self.fields["title"].widget.attrs["placeholder"] = "Title"
+        self.fields["slug"].widget.attrs["placeholder"] = "retype-title-with-hyphens"
         self.fields["category"].widget.attrs["placeholder"] = "Category"
         self.fields["content"].widget.attrs["placeholder"] = "Content"
         self.fields["picture"].widget.attrs["placeholder"] = "Picture"

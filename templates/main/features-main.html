@@ -6,46 +6,55 @@
 <div class="container">
     <hr class="featurette-divider" />
 
+    {% for single in article %}
 
-<div class="row featurette">
-  <div class="col-md-7 order-md-2">
-    <h2 class="featurette-heading fw-normal lh-1">
-      Oh yeah, it’s that good.
-      <span class="text-muted">See for yourself.</span>
-    </h2>
-    <p class="lead">
-      Another featurette? Of course. More placeholder content here to give you
-      an idea of how this layout would work with some actual real-world
-      content in place.
-    </p>
-    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-  </div>
-  <div class="col-md-5 order-md-1">
-    <img src="{% static '/main/images/main/pics/5.jpg' %}" alt="Enrich" />
-  </div>
-</div>
+   {% if forloop.counter|divisibleby:2 %}
 
-<hr class="featurette-divider" />
+    <div class="row featurette">
 
-<div class="row featurette">
-  <div class="col-md-7">
-    <h2 class="featurette-heading fw-normal lh-1">
-      And lastly, this one. <span class="text-muted">Checkmate.</span>
-    </h2>
-    <p class="lead">
-      And yes, this is the last block of representative placeholder content.
-      Again, not really intended to be actually read, simply here to give you
-      a better view of what this would look like with some actual content.
-      Your content.
-    </p>
-    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-  </div>
-  <div class="col-md-5">
-    <img src="{% static '/main/images/main/pics/3.jpg' %}" alt="Enrich" />
-  </div>
-</div>
+      <div class="col-md-5 order-md-1">
+        <img src="{{single.picture.url}}" alt="Enrich" />
+      </div>
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">
+          {{single.title}}
+        </h2>
+        <p class="lead">
+          {{single.content | slice:":255"}}
+        </p>
+        <p><a class="btn btn-secondary" href="{% url 'article' single.id %}">View details &raquo;</a></p>
+      </div>
+     
+    </div>
 
-<hr class="featurette-divider" />
+    <hr class="featurette-divider" />
+
+    {% else %}
+    <div class="row featurette">
+
+     
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading fw-normal lh-1">
+          {{single.title}}
+        </h2>
+        <p class="lead">
+          {{single.content | slice:":255"}}
+        </p>
+        <p><a class="btn btn-secondary" href="{% url 'article' single.id %}">View details &raquo;</a></p>
+      </div>
+
+      <div class="col-md-5 order-md-1">
+        <img src="{{single.picture.url}}" alt="Enrich" />
+      </div>
+      
+    </div>
+
+    <hr class="featurette-divider" />
+
+
+    {% endif %}
+
+{% endfor %}
 
 <!-- /END THE FEATURETTES -->
 </div>

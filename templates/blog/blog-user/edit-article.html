@@ -5,6 +5,7 @@
 
   <form
     class="row"
+    method="POST"
     action="{% url 'edit-article' article.id %}"
     enctype="multipart/form-data"
   >
@@ -14,16 +15,20 @@
       {{form.title}}
     </div>
     <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Slug</label>
+      {{form.slug}}
+    </div>
+    <div class="col-lg-4 mt-2 mb-2">
       <label for="exampleFormControlInput1" class="form-label">Tag</label>
       {{form.tag}}
     </div>
-    <div class="col-lg-5 mt-2 mb-2">
+    <div class="col-lg-4 mt-2 mb-2">
       <label for="exampleFormControlInput1" class="form-label">Category</label>
       {{form.category}}
     </div>
 
-    <div class="col-lg-5 mt-2 mb-2">
-      <label for="exampleFormControlInput1" class="form-label">Picture</label>
+    <div class="col-lg-4 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Image</label>
       {{form.picture}}
     </div>
     <div class="form-floating mt-2 mb-2">

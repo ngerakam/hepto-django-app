@@ -92,11 +92,15 @@ def Tag_articles(request, pk):
 
     paginated_article = Paginator(Article.objects.filter(tag=single_tag), 2)
 
+    paginated_article_sb = Paginator(Article.objects.all(), 5)
+
     page = request.GET.get("page")
+
+    article_sb = paginated_article_sb.get_page(page)
 
     article = paginated_article.get_page(page)
 
-    context = {"article": article, "tags": tags}
+    context = {"article": article, "tags": tags, "article_sb": article_sb}
     return render(request, 'blog/cat_blog.html', context)
 
 
@@ -105,10 +109,10 @@ def search(request):
         keyword = request.GET['keyword']
 
         if keyword:
-            article = Article.objects.order_by(
-                "-created_at").filter(Q(article__icontains=keyword) | Q(title__icontains=keyword))
+            art = Article.objects.order_by(
+                "-created_at").filter(Q(content__icontains=keyword) | Q(title__icontains=keyword))
 
-    context = {"article": article, }
+    context = {"art": art}
 
     return render(request, 'blog/index.html', context)
 
