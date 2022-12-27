@@ -11,6 +11,8 @@ class Author(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    user_profile = models.ForeignKey(
+        'ProfileDetails', on_delete=models.SET_NULL, null=True, related_name='+', blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -70,3 +72,31 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+
+class ProfileDetails(models.Model):
+
+    CATEGORY = [
+        ("MALE", "MALE"),
+        ("FEMALE", "FEMALE"),
+        ("Other", "Other"),
+    ]
+
+    user = models.OneToOneField(
+        Author, blank=True, null=True, on_delete=models.SET_NULL
+    )
+    country = models.CharField(max_length=50, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    profile_image = models.ImageField(
+        default="profile.png", null=True, blank=True)
+    address = models.CharField(max_length=50, null=True, blank=True)
+    zip_code = models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(
+        max_length=50, blank=True, null=True, choices=CATEGORY)
+
+    medical_field = models.CharField(max_length=200, blank=True, null=True)
+    detail = models.TextField(max_length=1500, blank=True, null=True)
+    secondary_phone = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.name

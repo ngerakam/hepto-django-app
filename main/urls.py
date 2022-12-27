@@ -2,7 +2,7 @@ from django.urls import path
 
 from django.contrib.auth import views as auth_views
 
-from blog import views
+from blog.views import Register_User, Login_User
 from . import views
 
 urlpatterns = [
@@ -23,8 +23,19 @@ urlpatterns = [
     path('campaign/', views.Campaign, name='campaign'),
     path('volunteer/', views.Volunteer, name='volunteer'),
 
-    # auth for blog
+    # auth for entire-site
 
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+
+    path('register/', Register_User, name='register'),
+
+    path('login/', Login_User, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+
+    path('campaign/', views.Campaign, name='campaign'),
+    path('volunteer/', views.Volunteer, name='volunteer'),
+
+
+    # Status section
+    path('403/', views.Status_403, name='error_403'),
 ]

@@ -1,62 +1,45 @@
 {%load static%} {% block content%}
-
+<!-- 
+  start
+ -->
+{% if user.is_authenticated %} {% else %}
 <nav class="py-2 bg-secondary">
   <div class="container d-flex flex-wrap">
     <ul class="list-unstyled d-flex">
-      <li class="ms-3">
-        <a class="link-dark" href="#">
+      <li class="ms-4">
+        <a
+          class="link-dark"
+          href="https://www.instagram.com/hepto.organization/?hl=en"
+        >
           <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
       </li>
-      <li class="ms-3">
-        <a class="link-dark" href="#"
-          ><i class="fa fa-twitter" aria-hidden="true"></i
-        ></a>
-      </li>
-      <li class="ms-3">
-        <a class="link-dark" href="#"
+      <!-- <li class="ms-3">
+          <a class="link-dark" href="#"
+            ><i class="fa fa-twitter" aria-hidden="true"></i
+          ></a>
+        </li> -->
+      <li class="ms-4">
+        <a
+          class="link-dark"
+          href="https://web.facebook.com/hepto.org/?_rdc=1&_rdr"
           ><i class="fa fa-facebook" aria-hidden="true"></i
         ></a>
       </li>
-      <li class="ms-3">
-        <a class="link-dark" href="#"
+      <li class="ms-4">
+        <a
+          class="link-dark"
+          href="https://www.linkedin.com/in/healthcare-nonprofit-hepto-b733b3177/"
           ><i class="fa fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
-      <li class="ms-3">
-        <a class="link-dark" href="#"
-          ><i class="fa fa-dribbble" aria-hidden="true"></i>
-        </a>
-      </li>
+      <!-- <li class="ms-3">
+          <a class="link-dark" href="#"
+            ><i class="fa fa-dribbble" aria-hidden="true"></i>
+          </a>
+        </li> -->
     </ul>
     <ul class="nav ms-auto">
-      {% if user.is_authenticated %}
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle text-w"
-          href="#"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          ><i class="fa fa-user me-2" aria-hidden="true"></i>{{request.user}}
-          <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
-        </a>
-        <ul class="dropdown-menu bg-yl">
-          <li>
-            <a class="dropdown-item bg-gr" href="#"
-              >Profile <i class="fa fa-cog" aria-hidden="true"></i
-            ></a>
-          </li>
-
-          <li>
-            <a class="dropdown-item bg-gr" href="{% url 'logout' %}"
-              >Logout <i class="fa fa-sign-out" aria-hidden="true"></i
-            ></a>
-          </li>
-        </ul>
-      </li>
-
-      {% else %}
       <li class="nav-item">
         <a href="{% url 'login' %}" class="nav-link link-dark px-2"
           ><i class="fa fa-sign-in" aria-hidden="true"></i> Login
@@ -67,10 +50,10 @@
           ><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a
         >
       </li>
-      {% endif %}
     </ul>
   </div>
 </nav>
+{% endif %}
 
 <nav
   class="navbar navbar-expand-sm navbar-dark bg-secondary"
@@ -102,6 +85,51 @@
 
     <div class="collapse navbar-collapse" id="navbarsExample03">
       <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-w"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {% if profile.profile_image %}
+            <img
+              width="32"
+              height="32"
+              class="rounded-circle me-3"
+              src="{{profile.profile_image.url}}"
+              alt="Writer"
+            />
+            {% else %}
+            <!-- else -->
+            <img
+              width="32"
+              height="32"
+              class="rounded-circle me-3"
+              src="{% static 'blog/images/profile.png' %}"
+              alt="Writer"
+            />
+            {% endif %} {{request.user}}
+            <!-- <i class="fa fa-angle-down" aria-hidden="true"></i> -->
+          </a>
+          <ul class="dropdown-menu bg-yl">
+            <li>
+              <a class="dropdown-item bg-gr" href="{% url 'profile' %}"
+                >Profile <i class="fa fa-cog" aria-hidden="true"></i
+              ></a>
+            </li>
+
+            <li>
+              <a class="dropdown-item bg-gr" href="{% url 'logout' %}"
+                >Logout <i class="fa fa-sign-out" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </li>
+        {% else %}
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -214,6 +242,8 @@
       <a href="{% url 'donate' %}" class="btn btn-outline-warning bg-yl ms-2"
         >Donate &#10084;</a
       >
+
+      {% endif %}
     </div>
   </div>
 </nav>

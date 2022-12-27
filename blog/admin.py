@@ -43,3 +43,6 @@ class TagAdmin(admin.ModelAdmin):
     autocomplete_fields = ['tagged_article']
     list_display = ['title']
     search_fields = ['title']
+
+
+admin.site.register(models.ProfileDetails)

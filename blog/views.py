@@ -17,7 +17,7 @@ from django.core.paginator import Paginator
 
 
 @unauthenticateduser
-def Register(request):
+def Register_User(request):
 
     if request.method == 'POST':
         login_form = CreateUserForm(request.POST)
@@ -27,7 +27,7 @@ def Register(request):
 
             username = login_form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='author')
+            group = Group.objects.get(name='basic')
             user.groups.add(group)
             Author.objects.create(
                 user=user,
@@ -47,6 +47,29 @@ def Register(request):
         context = {'login_form': login_form}
 
         return render(request, 'registration/signup.html', context)
+
+
+def Login_User(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+
+            login(request, user)
+            print(user)
+
+            return redirect('status')
+
+        else:
+            messages.error(request, "Invalid Password")
+            return redirect("login")
+
+    else:
+
+        return render(request, 'registration/login.html',)
 
 
 def Blog(request):
@@ -73,6 +96,8 @@ def BlogDetail(request, pk):
     single = Article.objects.get(id=pk)
     tags = Tag.objects.all()
 
+    profile_user = ProfileDetails.objects.get(user=single.author)
+
     paginated_article_sb = Paginator(Article.objects.all(), 5)
 
     page = request.GET.get("page")
@@ -81,7 +106,7 @@ def BlogDetail(request, pk):
 
     categories = Category.objects.filter(featured_article=single)
     context = {"single": single, "tags": tags,
-               "categories": categories, "article_sb": article_sb}
+               "categories": categories, "article_sb": article_sb, "profile_user": profile_user}
 
     return render(request, 'blog/single-blog.html', context)
 
@@ -118,15 +143,18 @@ def search(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['author'])
+@allowed_users(allowed_roles=['author', 'basic'])
 def Status(request):
     # pk=request.user.id
     author = request.user.author
     articles = request.user.author.article_set.all()
 
+    profile = ProfileDetails.objects.get(user=author)
+
     number = articles.count()
 
-    context = {'articles': articles, 'number': number, "author": author}
+    context = {'articles': articles, 'number': number,
+               "author": author, "profile": profile}
     return render(request, 'blog/blog-user/index.html', context)
 
 

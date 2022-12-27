@@ -1,0 +1,65 @@
+{% extends 'main/base-main.html' %} {% load static %} {% block content %}
+
+<div class="container card-c ms-auto me-auto">
+  <h2 class="text-center mb-5">Profile details</h2>
+
+  <form
+    class="row"
+    method="POST"
+    action="{% url 'profile' %}"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %}
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">City</label>
+      {{form.city}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Country</label>
+      {{form.country}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Address</label>
+      {{form.address}}
+    </div>
+
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label">Zip-Code</label>
+      {{form.zip_code}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1">Gender</label>
+      {{form.gender}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1">Phone Number</label>
+      {{form.secondary_phone}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Profile Image</label
+      >
+      {{form.profile_image}}
+    </div>
+    <div class="col-lg-5 mt-2 mb-2">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Medical area of specialization</label
+      >
+      {{form.medical_field}}
+    </div>
+    <div class="form-floating mt-2 mb-2">
+      <label for="floatingTextarea">Tell us about your self ....</label>
+      {{form.detail}}
+    </div>
+    <div class="text-center">
+      <input
+        type="submit"
+        value="Add Profile"
+        class="btn btn-success"
+        style="width: 140px"
+      />
+    </div>
+  </form>
+</div>
+
+{% endblock %}

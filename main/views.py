@@ -35,6 +35,10 @@ def Health(request):
     return render(request, 'main/403.html')
 
 
+def Error_403(request):
+    return render(request, 'main/403.html')
+
+
 def Health1(request):
     return render(request, 'blog/blog-user/index.html')
 
@@ -73,3 +77,21 @@ def Campaign(request):
 
 def Volunteer(request):
     return render(request, 'main/volunteer.html')
+
+
+# Errors
+
+def Status_403(request):
+    return render(request, 'main/403.html')
+
+
+def Status_404(request):
+    return render(request, 'main/404.html')
+
+
+def Status_408(request):
+    return render(request, 'main/408.html')
+
+
+def Status_500(request):
+    return render(request, 'main/500.html')

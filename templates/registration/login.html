@@ -7,6 +7,13 @@
 	<title>BlogApp</title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- favico -->
+	<link
+	rel="shortcut icon"
+	href="{% static '/main/images/fav/favicon.ico' %}"
+	type="image/x-icon"
+  />
+
 	<!-- Font-->
 	<link rel="stylesheet" type="text/css" href="{% static '/reg_form/css/roboto-font.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static '/reg_form/fonts/font-awesome-5/css/fontawesome-all.min.css' %}">
@@ -19,7 +26,7 @@
 		<div class="form-v5-content">
             
             
-			<form class="form-detail" action="" method="post">
+			<form class="form-detail" action="" method="POST">
                 {% csrf_token %}
 				<h2>Login to Hepto</h2>
 				<div class="form-row">

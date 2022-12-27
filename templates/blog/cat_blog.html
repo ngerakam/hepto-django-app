@@ -31,12 +31,12 @@
           {% if article.has_previous %}
           <a class="page-numbers" href="?page=1">First</a>
           <a class="page-numbers" href="?page={{article.previous_page_number}}"
-            ><i class="icofont-thin-double-left"></i
+            ><i class="fa fa-angle-double-left" aria-hidden="true"></i
           ></a>
           {% endif %} &nbsp;&nbsp; Page {{article.number}} of
           {{article.paginator.num_pages}} &nbsp;&nbsp; {% if article.has_next %}
           <a class="page-numbers" href="?page={{article.next_page_number}}"
-            ><i class="icofont-thin-double-right"></i
+            ><i class="fa fa-angle-double-right" aria-hidden="true"></i
           ></a>
           <a class="page-numbers" href="?page={{article.paginator.num_pages}}"
             >Last</a

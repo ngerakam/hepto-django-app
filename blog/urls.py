@@ -7,7 +7,6 @@ urlpatterns = [
     path('Tag_articles/<str:pk>/', views.Tag_articles, name="tags"),
 
 
-    path('register/', views.Register, name='register'),
 
     # blog user
 
