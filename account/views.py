@@ -14,7 +14,7 @@ from blog.decorators import allowed_users
 @allowed_users(allowed_roles=['author', 'basic'])
 def Profile(request):
 
-    author = request.user.author.id
+    author = request.user
 
     profile = ProfileDetails.objects.get(user=author)
 
@@ -28,7 +28,7 @@ def Profile(request):
             if form.is_valid():
 
                 form = form.save(commit=False)
-                form.user = request.user.author
+                form.user = request.user
                 form.save()
                 messages.success(
                     request, 'Updated Profile Details Successfully')
@@ -39,7 +39,7 @@ def Profile(request):
             form = ProfileDetailForms(instance=profile)
 
             context = {
-                "form": form,
+                "form": form, "profile": profile
             }
 
             return render(request, 'account/profile.html', context)
@@ -62,7 +62,7 @@ def Profile(request):
                 return redirect('status')
 
         context = {
-            "form": form,
+            "form": form, "profile": profile
         }
 
         return render(request, 'account/profile.html', context)

@@ -11,8 +11,6 @@ class Author(models.Model):
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    user_profile = models.ForeignKey(
-        'ProfileDetails', on_delete=models.SET_NULL, null=True, related_name='+', blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -82,9 +80,7 @@ class ProfileDetails(models.Model):
         ("Other", "Other"),
     ]
 
-    user = models.OneToOneField(
-        Author, blank=True, null=True, on_delete=models.SET_NULL
-    )
+    user = models.OneToOneField(User, null=True,  on_delete=models.CASCADE)
     country = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=50, null=True, blank=True)
     profile_image = models.ImageField(
@@ -99,4 +95,4 @@ class ProfileDetails(models.Model):
     secondary_phone = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username

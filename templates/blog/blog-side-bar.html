@@ -3,12 +3,14 @@
 <aside class="col-12 bg-light sticky-top" id="left">
   <div class="mt-2 mb-2">
     <h3 class="mb-3 text-center">Search here</h3>
-    <form role="search" action="{% url 'blog' %}">
+    <form role="search" action="{% url 'search' %}" method="POST">
+      {% csrf_token %}
       <input
         class="form-control"
         type="search"
-        placeholder="Search"
+        placeholder="Search articles"
         aria-label="Search"
+        name="searched"
       />
     </form>
   </div>

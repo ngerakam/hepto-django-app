@@ -1,22 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from blog.models import Article
+from blog.models import Article, ProfileDetails
+
+from .models import Volunteer
+
+from .forms import VolunteerForm
 
 # pagination
 from django.core.paginator import Paginator
 
 
 def Home(request):
+    user = request.user.id
 
-    paginated_article = Paginator(Article.objects.all(), 2)
+    if user:
 
-    page = request.GET.get("page")
+        profile = ProfileDetails.objects.get(user=user)
 
-    article = paginated_article.get_page(page)
+        paginated_article = Paginator(Article.objects.all(), 2)
 
-    context = {"article": article}
+        page = request.GET.get("page")
 
-    return render(request, 'main/index.html', context)
+        article = paginated_article.get_page(page)
+
+        context = {"article": article, "profile": profile}
+
+        return render(request, 'main/index.html', context)
+    else:
+        paginated_article = Paginator(Article.objects.all(), 2)
+
+        page = request.GET.get("page")
+
+        article = paginated_article.get_page(page)
+
+        context = {"article": article}
+
+        return render(request, 'main/index.html', context)
 
 
 def Glance(request):
@@ -76,7 +95,21 @@ def Campaign(request):
 
 
 def Volunteer(request):
-    return render(request, 'main/volunteer.html')
+    if request.method == 'POST':
+
+        form = VolunteerForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+        return redirect('home')
+    else:
+
+        form = VolunteerForm()
+
+        context = {"form": form}
+
+        return render(request, 'main/volunteer.html', context)
 
 
 # Errors

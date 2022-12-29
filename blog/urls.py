@@ -6,6 +6,8 @@ urlpatterns = [
     path('single_article/<str:pk>/', views.BlogDetail, name='article'),
     path('Tag_articles/<str:pk>/', views.Tag_articles, name="tags"),
 
+    # search bar
+    path('search/', views.search, name="search"),
 
 
     # blog user

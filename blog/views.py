@@ -35,6 +35,10 @@ def Register_User(request):
                 email=user.email,
             )
 
+            ProfileDetails.objects.create(
+                user=user
+            )
+
             messages.success(
                 request, 'You are successfuly registered!! ' + username)
 
@@ -72,6 +76,13 @@ def Login_User(request):
         return render(request, 'registration/login.html',)
 
 
+@login_required(login_url='login')
+def Logout(request):
+    logout(request)
+    messages.success(request, 'You are logged out')
+    return redirect('home')
+
+
 def Blog(request):
     tags = Tag.objects.all()
     art = Article.objects.all()
@@ -96,7 +107,7 @@ def BlogDetail(request, pk):
     single = Article.objects.get(id=pk)
     tags = Tag.objects.all()
 
-    profile_user = ProfileDetails.objects.get(user=single.author)
+    profile_user = ProfileDetails.objects.get(user=single.author.user)
 
     paginated_article_sb = Paginator(Article.objects.all(), 5)
 
@@ -130,23 +141,51 @@ def Tag_articles(request, pk):
 
 
 def search(request):
-    if 'keyword' in request.GET:
-        keyword = request.GET['keyword']
+    if request.method == 'POST':
+        keyword = request.POST['searched']
 
-        if keyword:
-            art = Article.objects.order_by(
-                "-created_at").filter(Q(content__icontains=keyword) | Q(title__icontains=keyword))
+        art = Article.objects.filter(
+            Q(content__icontains=keyword) | Q(title__icontains=keyword))
 
-    context = {"art": art}
+        paginated_article = Paginator(art, 2)
+        page = request.GET.get("page")
 
-    return render(request, 'blog/index.html', context)
+        article = paginated_article.get_page(page)
+
+        tags = Tag.objects.all()
+        paginated_article_sb = Paginator(Article.objects.all(), 5)
+        article_sb = paginated_article_sb.get_page(page)
+
+        context = {"article": article,
+                   "tags": tags, "article_sb": article_sb}
+
+        return render(request, 'blog/search-blog.html', context)
+    else:
+
+        tags = Tag.objects.all()
+        art = Article.objects.all()
+
+        paginated_article = Paginator(Article.objects.all(), 2)
+
+        # paginated for side bar
+        paginated_article_sb = Paginator(Article.objects.all(), 5)
+
+        page = request.GET.get("page")
+
+        article = paginated_article.get_page(page)
+
+        article_sb = paginated_article_sb.get_page(page)
+
+        context = {"article": article, "tags": tags,
+                   "art": art, "article_sb": article_sb}
+        return render(request, 'blog/index.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['author', 'basic'])
 def Status(request):
     # pk=request.user.id
-    author = request.user.author
+    author = request.user
     articles = request.user.author.article_set.all()
 
     profile = ProfileDetails.objects.get(user=author)
