@@ -185,26 +185,16 @@ def search(request):
 @allowed_users(allowed_roles=['author', 'basic'])
 def Status(request):
     # pk=request.user.id
-    user = request.user.author
+    author = request.user
+    articles = request.user.author.article_set.all()
 
-    if user:
+    profile = ProfileDetails.objects.get(user=author)
 
-        articles = request.user.author.article_set.all()
+    number = articles.count()
 
-        author = request.user
-        profile = ProfileDetails.objects.get(user=author)
-
-        number = articles.count()
-
-        context = {'articles': articles, 'number': number,
-                   "author": author, "profile": profile}
-        return render(request, 'blog/blog-user/index.html', context)
-    else:
-        author = request.user
-        profile = ProfileDetails.objects.get(user=author)
-
-        context = {"author": author, "profile": profile}
-        return render(request, 'blog/blog-user/index.html', context)
+    context = {'articles': articles, 'number': number,
+               "author": author, "profile": profile}
+    return render(request, 'blog/blog-user/index.html', context)
 
 
 #
@@ -214,7 +204,7 @@ def Status(request):
 @allowed_users(allowed_roles=['author'])
 def Add_Article(request, pk):
 
-    author = Author.objects.get(id=pk)
+    author = request.user.author
     form = ArticlesForm()
 
     if request.method == 'POST':

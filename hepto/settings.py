@@ -84,29 +84,32 @@ WSGI_APPLICATION = 'hepto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-#     }
-# }
-
-# DATABASES['default'] = dj_database_url.config(
-#     default='postgres://gobtnkcbdllzwn:7e491d7833169e35aecff0bef6a9ede333108edaeae2fd8478a97cc5fc321eca@ec2-3-230-122-20.compute-1.amazonaws.com:5432/dbu3potn6cqb2h'
-# )
-
-# db_from_env = dj_database_url.config(conn_max_age=600)
-
-# DATABASES['default'].update(db_from_env)
-
 DATABASES = {
-
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
+    }
 }
+
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://zcdrmpmpqihuri:e962d17e11ecf674772091dc56b1474d2205a2a6aa7037a7719c30d7f4ca4250@ec2-52-203-118-49.compute-1.amazonaws.com:5432/d4ed5qrnjbp430'
+)
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+
+DATABASES['default'].update(db_from_env)
+
+
+# ///////////////////////////////////////////////////////////////////////////////////////////////
+
+# DATABASES = {
+
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

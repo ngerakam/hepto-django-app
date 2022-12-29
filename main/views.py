@@ -15,7 +15,7 @@ def Home(request):
 
     if user:
 
-        profile = ProfileDetails.objects.get(user=user)
+        profile = ProfileDetails.objects.filter(user=user)
 
         paginated_article = Paginator(Article.objects.all(), 2)
 
