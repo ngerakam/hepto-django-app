@@ -82,20 +82,20 @@ WSGI_APPLICATION = 'hepto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-    }
-}
+#     }
+# }
 
-DATABASES['default'] = dj_database_url.config(
-    default='postgres://gobtnkcbdllzwn:7e491d7833169e35aecff0bef6a9ede333108edaeae2fd8478a97cc5fc321eca@ec2-3-230-122-20.compute-1.amazonaws.com:5432/dbu3potn6cqb2h'
-)
+# DATABASES['default'] = dj_database_url.config(
+#     default='postgres://gobtnkcbdllzwn:7e491d7833169e35aecff0bef6a9ede333108edaeae2fd8478a97cc5fc321eca@ec2-3-230-122-20.compute-1.amazonaws.com:5432/dbu3potn6cqb2h'
+# )
 
-db_from_env = dj_database_url.config(conn_max_age=600)
+# db_from_env = dj_database_url.config(conn_max_age=600)
 
-DATABASES['default'].update(db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 """DATABASES = {
 
