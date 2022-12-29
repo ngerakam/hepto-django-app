@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'hepto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-#     }
-# }
+    }
+}
 """
 DATABASES['default'] = dj_database_url.config(
     default='postgres://lhsxrtckgppsxk:7712f4c416b41600a7c8a49b5db1d4ef2946da6c1e3c817b94d486aff604c3ba@ec2-3-229-252-6.compute-1.amazonaws.com:5432/d2687v8b1rc8if'
@@ -97,14 +97,14 @@ db_from_env = dj_database_url.config(conn_max_age=600)
 
 DATABASES['default'].update(db_from_env)"""
 
-DATABASES = {
+"""DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 
-}
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
