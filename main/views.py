@@ -59,7 +59,7 @@ def Error_403(request):
 
 
 def Health1(request):
-    return render(request, 'blog/blog-user/index.html')
+    return render(request, 'blog/408/index.html')
 
 
 def Health2(request):
