@@ -185,7 +185,7 @@ def search(request):
 @allowed_users(allowed_roles=['author', 'basic'])
 def Status(request):
     # pk=request.user.id
-    author = request.user
+    author = request.user 
     articles = request.user.author.article_set.all()
 
     profile = ProfileDetails.objects.get(user=author)
