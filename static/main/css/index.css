@@ -22,6 +22,7 @@
   --secondary-color: #1c3fa8;
   --dark-color: #002240;
   --light-color: #f4f4f4;
+  --hepto-nav: #121c57;
 }
 
 body {
@@ -51,6 +52,11 @@ p {
 img {
   max-width: fit-content;
 }
+
+/* nav .bg-hepto {
+  background-color: var(--hepto-nav);
+  color: #0000;
+} */
 
 /* corousel */
 
